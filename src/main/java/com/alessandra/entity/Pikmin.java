@@ -15,7 +15,7 @@ public class Pikmin implements Serializable {
 
     private static final long serialVersionUID = 2546206700129465299L;
     @Id
-    @Column(name = "id") //column annotation not needed when name is the same
+    @Column(name = "id") //column annotation not needed when name is the same?
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "quality")
@@ -34,5 +34,15 @@ public class Pikmin implements Serializable {
         this.quality = quality;
         this.color = color;
         this.tossDistance = tossDistance;
+    }
+
+    @Override
+    public String toString() {
+        return "Pikmin{" +
+                "id=" + id +
+                ", quality=" + quality +
+                ", color='" + color + '\'' +
+                ", tossDistance=" + tossDistance +
+                '}';
     }
 }

@@ -18,16 +18,26 @@ public class PikminController {
     private PikminRepository pikminRepository;
 
     @RequestMapping("/save")
+    @Transactional
     public String process() {
-        pikminRepository.save(new Pikmin(PikminQuality.FIRE, "Red", 10));
+        pikminRepository.save(new Pikmin(PikminQuality.ELECTRICITY, "Yellow", 30));
         return "Done";
     }
 
     @RequestMapping("/find/{id}")
     @Transactional
     public String find(@PathVariable("id") Integer id) {
-        Pikmin pikmin = pikminRepository.findById(id);
-        return String.format("%s: %s %s %s", pikmin.getId(), pikmin.getColor(), pikmin.getQuality(), pikmin.getTossDistance());
+        return pikminRepository.findById(id).toString();
+    }
+
+    @RequestMapping("/findAll")
+    @Transactional
+    public String findAll() {
+        StringBuilder result = new StringBuilder();
+        for (Pikmin pikmin : pikminRepository.findAll()) {
+            result.append(pikmin.toString()).append("\n");
+        }
+        return result.toString();
     }
 
 }
